@@ -29,6 +29,18 @@ function aviosToCash(avios, valuePerPence) {
   return Math.round(avios / valuePerPence);
 }
 
-console.log(aviosToCash(25000, VALUE_TRESHOLDS.AMEX.value));
-console.log(aviosToCash(25000, VALUE_TRESHOLDS.HFP.value));
+//     11500 Avios + £ 135.00
+function getCashValueFromString(string) {
+  const regex = new RegExp(/£\s?(\d*\.?\d*)/);
+  const result = regex.exec(string);
+  console.log(result);
+  return Math.round(result[1]);
+}
+
+console.log(getCashValueFromString("11500 Avios + £ 135.00"));
+
+// function getAviosValueFromString(string) {}
+
 console.log(aviosToCash(25000, VALUE_TRESHOLDS.TWO.value));
+console.log(aviosToCash(25000, VALUE_TRESHOLDS.HFP.value));
+console.log(aviosToCash(25000, VALUE_TRESHOLDS.AMEX.value));
