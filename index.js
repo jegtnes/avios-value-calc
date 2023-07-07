@@ -30,16 +30,21 @@ function aviosToCash(avios, valuePerPence) {
 }
 
 //     11500 Avios + £ 135.00
-function getCashValueFromString(string) {
+function getCashFromString(string) {
   const regex = new RegExp(/£\s?(\d*\.?\d*)/);
   const result = regex.exec(string);
-  console.log(result);
   return Math.round(result[1]);
 }
 
 console.log(getCashValueFromString("11500 Avios + £ 135.00"));
 
-// function getAviosValueFromString(string) {}
+function getAviosFromString(string) {
+  const regex = new RegExp(/^(\d*) Avios/);
+  const result = regex.exec(string);
+  return Math.round(result[1]);
+}
+
+console.log(getAviosValueFromString("11500 Avios + £ 135.00"));
 
 console.log(aviosToCash(25000, VALUE_TRESHOLDS.TWO.value));
 console.log(aviosToCash(25000, VALUE_TRESHOLDS.HFP.value));
