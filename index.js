@@ -25,8 +25,14 @@ const VALUE_TRESHOLDS = {
   }
 }
 
+function calculateTotalValue(string, value) {
+  return (
+    getCashFromString(string) + aviosToCash(getAviosFromString(string), value)
+  );
+}
+
 function aviosToCash(avios, valuePerPence) {
-  return Math.round(avios / valuePerPence);
+  return Math.round((avios * valuePerPence) / 100 / 100);
 }
 
 function parseText(text) {
@@ -48,19 +54,15 @@ function getAviosFromString(string) {
   return Math.round(result[1]);
 }
 
-console.log(getAviosFromString("11500 Avios + £ 135.00"));
-
-console.log(aviosToCash(25000, VALUE_TRESHOLDS.TWO.value));
-console.log(aviosToCash(25000, VALUE_TRESHOLDS.HFP.value));
-console.log(aviosToCash(25000, VALUE_TRESHOLDS.AMEX.value));
-
 console.log(
   parseText(`    31000 Avios + £ 9.00
 26500 Avios + £ 25.00
 19500 Avios + £ 50.00
 14500 Avios + £ 95.00
 11500 Avios + £ 135.00`).forEach((l) => {
-    console.log(getCashFromString(l));
-    console.log(getAviosFromString(l));
+    console.log(l, 'cash from string', getCashFromString(l));
+    console.log(l, 'avios from string', getAviosFromString(l));
+    console.log(l, 'TOTAL VALUE', calculateTotalValue(l, VALUE_TRESHOLDS.NECTAR.value));
+    console.log("-----");
   })
 );
