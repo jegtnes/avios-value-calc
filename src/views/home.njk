@@ -1,5 +1,8 @@
 {% extends "index.njk" %}
 
 {% block mainContent %}
-    {{message}}
+    <form action="/" method="POST">
+        <textarea name="value" id="value">{{value}}</textarea>
+        <button type="submit">Submit</button>
+    </form>
 {% endblock %}
