@@ -1,4 +1,4 @@
-const VALUE_TRESHOLDS = [
+const VALUE_TRESHOLDS:Array<object> = [
   {
     name: "2p/Avios",
     value: 200,
@@ -25,29 +25,29 @@ const VALUE_TRESHOLDS = [
   }
 ];
 
-function calculateTotalValue(string, value) {
+function calculateTotalValue(string: string, value: number) {
   return (
     getCashFromString(string) + aviosToCash(getAviosFromString(string), value)
   );
 }
 
-function aviosToCash(avios, valuePerPence) {
+function aviosToCash(avios: number, valuePerPence: number) {
   return Math.round((avios * valuePerPence) / 100 / 100);
 }
 
-function parseText(text) {
+function parseText(text: string) {
   return text.split("\n").map((line) => line.trim());
 }
 
-function getCashFromString(string) {
+function getCashFromString(string: string) {
   const regex = new RegExp(/£\s?(\d*\.?\d*)/);
-  const result = regex.exec(string);
+  const result: any = regex.exec(string);
   return Math.round(result[1]);
 }
 
 function getAviosFromString(string) {
   const regex = new RegExp(/^(\d*) Avios/);
-  const result = regex.exec(string);
+  const result: any = regex.exec(string);
   return Math.round(result[1]);
 }
 

@@ -4,10 +4,12 @@
     "koa-nunjucks-async": "^1.2.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.2"
+    "@types/koa": "^2.13.12",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2"
   },
   "scripts": {
-    "start": "node index.js",
-    "watch": "nodemon -e 'js,json,njk' index.js"
+    "start": "node index.ts",
+    "watch": "nodemon -e 'js,json,ts,njk' src/index.ts"
   }
 }
