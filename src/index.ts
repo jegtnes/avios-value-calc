@@ -3,7 +3,7 @@ const { koaBody } = require('koa-body');
 // @ts-ignore
 import nunjucks from 'koa-nunjucks-async';
 
-import { parseText, calculateTotalValue } from './utils';
+import { parseText, calculateTotalValue, VALUE_TRESHOLDS } from './utils';
 
 const app = new Koa();
 app.use(koaBody());
@@ -13,17 +13,21 @@ app.use(nunjucks('src/views', {
 }));
 
 app.use(async (ctx: Koa.Context) => {
-    const processed: any = parseText(ctx.request.body.value).map((i: any) => {
+    const submittedValues: any = ctx.request.body?.submittedValues;
+    const aviosValue: any = ctx.request.body?.aviosValue || 100;
+    const processed: any = parseText(ctx.request.body.submittedValues).map((i: any) => {
         return {
             input: i,
-            value: calculateTotalValue(i, 100),
+            value: calculateTotalValue(i, aviosValue),
         }
     });
-    console.log(processed);
+
     await ctx.render('home', {
         title: "Avios value calculator",
-        value: ctx.request.body.value,
+        submittedValues,
         processed,
+        valueTresholds: VALUE_TRESHOLDS,
+        aviosValue,
     });
 });
 

@@ -2,7 +2,14 @@
 
 {% block mainContent %}
     <form action="/" method="POST">
-        <textarea name="value" id="value">{{value}}</textarea>
+        <textarea name="submittedValues" id="submittedValues">{{submittedValues}}</textarea>
+        {% if valueTresholds %}
+        <select name="aviosValue">
+            {% for item in valueTresholds %}
+                <option value={{item.value}}>{{item.name}}</option>
+            {% endfor %}
+        </select>
+        {% endif %}
         <button type="submit">Submit</button>
     </form>
     {% if processed %}

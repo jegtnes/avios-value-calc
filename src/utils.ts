@@ -1,4 +1,4 @@
-const VALUE_TRESHOLDS:Array<object> = [
+export const VALUE_TRESHOLDS:Array<object> = [
   {
     name: "2p/Avios",
     value: 200,
@@ -36,6 +36,7 @@ function aviosToCash(avios: number, valuePerPence: number) {
 }
 
 export function parseText(text: string) {
+  if(!text) return [];
   return text.split("\n").map((line) => line.trim());
 }
 
