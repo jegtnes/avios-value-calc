@@ -25,7 +25,7 @@ const VALUE_TRESHOLDS:Array<object> = [
   }
 ];
 
-function calculateTotalValue(string: string, value: number) {
+export function calculateTotalValue(string: string, value: number) {
   return (
     getCashFromString(string) + aviosToCash(getAviosFromString(string), value)
   );
@@ -35,7 +35,7 @@ function aviosToCash(avios: number, valuePerPence: number) {
   return Math.round((avios * valuePerPence) / 100 / 100);
 }
 
-function parseText(text: string) {
+export function parseText(text: string) {
   return text.split("\n").map((line) => line.trim());
 }
 
@@ -45,14 +45,8 @@ function getCashFromString(string: string) {
   return Math.round(result[1]);
 }
 
-function getAviosFromString(string) {
+function getAviosFromString(string: string) {
   const regex = new RegExp(/^(\d*) Avios/);
   const result: any = regex.exec(string);
   return Math.round(result[1]);
-}
-
-module.exports = {
-  VALUE_TRESHOLDS,
-  calculateTotalValue,
-  parseText,
 }

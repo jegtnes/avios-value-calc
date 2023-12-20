@@ -5,4 +5,12 @@
         <textarea name="value" id="value">{{value}}</textarea>
         <button type="submit">Submit</button>
     </form>
+    {% if processed %}
+        <h2>Result</h2>
+        <dl>
+            {% for item in processed %}
+                <dt>{{ item.input }}</dt>
+                <dd>{{ item.value }}</dd>
+            {% endfor %}
+    {% endif %}
 {% endblock %}
