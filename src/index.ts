@@ -1,18 +1,40 @@
+import path from 'path';
+
 import Koa from 'koa';
-const { koaBody } = require('koa-body');
+import koaBody from 'koa-body';
+import mount from 'koa-mount';
+import Router from '@koa/router';
+import serve from 'koa-static';
+
 // @ts-ignore
 import nunjucks from 'koa-nunjucks-async';
 
 import { parseText, calculateTotalValue, VALUE_TRESHOLDS } from './utils';
 
 const app = new Koa();
+const router = new Router();
+
 app.use(koaBody());
 
 app.use(nunjucks('src/views', {
     ext: '.njk'
 }));
 
-app.use(async (ctx: Koa.Context) => {
+app.use(mount('/assets', serve('src/assets')));
+
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+router.get('/', async (ctx: Koa.Context, next: Koa.Next) => {
+    await ctx.render('home', {
+        title: "Avios value calculator",
+        valueTresholds: VALUE_TRESHOLDS,
+    });
+
+    next();
+});
+
+router.post('/', async (ctx: Koa.Context, next: Koa.Next) => {
     const submittedValues: any = ctx.request.body?.submittedValues;
     const aviosValue: any = ctx.request.body?.aviosValue || 100;
     const processed: any = parseText(ctx.request.body.submittedValues).map((i: any) => {
@@ -29,6 +51,8 @@ app.use(async (ctx: Koa.Context) => {
         valueTresholds: VALUE_TRESHOLDS,
         aviosValue,
     });
+
+    next();
 });
 
 app.listen(6969);

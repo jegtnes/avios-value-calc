@@ -16,12 +16,18 @@
     </form>
     {% if processed %}
         <h2>Result</h2>
-        <p>If you value an Avios point at {{aviosValue}}, these are the total possible costs of your redemption:</p>
-        <dl>
+        <p>If you value an Avios point at {{aviosValue / 100}}p, these are the total possible costs of your redemption:</p>
+        <table>
+            <tr>
+                <th>Avios + Cash</th>
+                <th>Combined cash value</th>
+            </tr>
             {% for item in processed %}
-                <dt>{{ item.input }}</dt>
-                <dd>{{ item.value }}</dd>
+                <tr>
+                    <td>{{ item.input }}</td>
+                    <td>{{ item.value }}</td>
+                </tr>
             {% endfor %}
-        </dl>
+        </table>
     {% endif %}
 {% endblock %}
