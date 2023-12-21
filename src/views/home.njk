@@ -6,7 +6,9 @@
         {% if valueTresholds %}
         <select name="aviosValue">
             {% for item in valueTresholds %}
-                <option value={{item.value}}>{{item.name}}</option>
+                <option value="{{item.value}}" {% if item.value == aviosValue %}selected{% endif %}>
+                    {{item.name}}
+                </option>
             {% endfor %}
         </select>
         {% endif %}
@@ -14,10 +16,12 @@
     </form>
     {% if processed %}
         <h2>Result</h2>
+        <p>If you value an Avios point at {{aviosValue}}, these are the total possible costs of your redemption:</p>
         <dl>
             {% for item in processed %}
                 <dt>{{ item.input }}</dt>
                 <dd>{{ item.value }}</dd>
             {% endfor %}
+        </dl>
     {% endif %}
 {% endblock %}
