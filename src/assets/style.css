@@ -36,16 +36,59 @@
 html {
     font-family: var(--font-system);
     font-size: var(--step-0);
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: var(--space-m);
 }
 
-h1 {
+h1,
+.alpha {
     font-size: var(--step-4);
+    line-height: 1.1;
+    margin-block: 0 var(--space-s-m);
 }
 
-h2 {
+h2,
+.beta {
     font-size: var(--step-3);
 }
 
-h3 {
-    font-size: var(--step-2);
+textarea {
+    font-family: var(--font-system);
+    font-size: var(--step-0);
+    padding: var(--space-xs);
+    min-height: 17.5ex;
+    width: 100%;
+}
+
+p + p {
+    margin-block-start: var(--space-s-m);
+}
+
+form {
+    display: grid;
+    gap: var(--space-s-m);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, auto);
+
+    & > :first-child {
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+    }
+
+    aside {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        font-size: var(--step--1);
+    }
+
+    label[for="aviosValue"] {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+
+    button {
+        grid-column: 1 / 3;
+        grid-row: 3 / 4;
+    }
 }
