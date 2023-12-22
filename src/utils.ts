@@ -42,7 +42,7 @@ export function parseText(text: string) {
 
 function getCashFromString(string: string) {
   const regex = new RegExp(/£\s?(\d*\.?\d*)/);
-  const result: any = regex.exec(string);
+  const result: any = regex.exec(string.replace(",", ""));
   return Math.round(result[1]);
 }
 
