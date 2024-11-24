@@ -1,0 +1,42 @@
+{% extends "index.njk" %}
+
+{% block mainContent %}
+    <form action="/" method="POST">
+        <label for="submittedValues">Pricing options
+            <textarea name="submittedValues" id="submittedValues">{{submittedValues}}</textarea>
+        </label>
+        {% if valueTresholds %}
+            <aside>
+                <p>The <i>total cost</i> of your redemption will be calculated based on how valuable you consider one Avios point to be.</p>
+                <p>These articles—<a href="https://www.headforpoints.com/2023/12/18/my-1p-rule-for-picking-the-best-avios-and-cash-combination-to-book/">My 1p rule for picking the best ‘Avios and cash’ combination to book</a> and <a href="https://www.headforpoints.com/2022/01/04/what-is-an-avios-point-worth-6/">What is an Avios Point worth?</a> from HeadForPoints may be useful in determining what you personally would value an Avios point at.</p>
+            </aside>
+            <label for="aviosValue">
+                Avios value
+                <select name="aviosValue" id="aviosValue">
+                    {% for item in valueTresholds %}
+                        <option value="{{item.value}}" {% if item.value == aviosValue %}selected{% endif %}>
+                            {{item.name}}
+                        </option>
+                    {% endfor %}
+                </select>
+            </label>
+        {% endif %}
+        <button type="submit">Calculate</button>
+    </form>
+    {% if processed %}
+        <h2>Result</h2>
+        <p>If you value an Avios point at {{aviosValue / 100}}p, these are the total possible costs of your redemption:</p>
+        <table>
+            <tr>
+                <th>Avios + Cash</th>
+                <th>Effective cash value</th>
+            </tr>
+            {% for item in processed %}
+                <tr>
+                    <td>{{ item.input }}</td>
+                    <td>{{ item.value }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

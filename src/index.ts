@@ -25,16 +25,26 @@ app.use(mount('/assets', serve('src/assets')));
 app.use(router.routes());
 app.use(router.allowedMethods());
 
+
+
 router.get('/', async (ctx: Koa.Context, next: Koa.Next) => {
     await ctx.render('home', {
-        title: "Avios value calculator",
+        title: "Avios redemption value calculator",
+    });
+
+    next();
+});
+
+router.get('/calculator', async (ctx: Koa.Context, next: Koa.Next) => {
+    await ctx.render('calculator', {
+        title: "Avios redemption value calculator",
         valueTresholds: VALUE_TRESHOLDS,
     });
 
     next();
 });
 
-router.post('/', async (ctx: Koa.Context, next: Koa.Next) => {
+router.post('/calculator', async (ctx: Koa.Context, next: Koa.Next) => {
     const submittedValues: any = ctx.request.body?.submittedValues;
     const aviosValue: any = ctx.request.body?.aviosValue || 100;
     const processed: any = parseText(ctx.request.body.submittedValues).map((i: any) => {
@@ -44,8 +54,8 @@ router.post('/', async (ctx: Koa.Context, next: Koa.Next) => {
         }
     });
 
-    await ctx.render('home', {
-        title: "Avios value calculator",
+    await ctx.render('calculator', {
+        title: "Avios redemption value calculator",
         submittedValues,
         processed,
         valueTresholds: VALUE_TRESHOLDS,

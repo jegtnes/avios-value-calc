@@ -43,14 +43,14 @@ html {
 
 h1,
 .alpha {
-    font-size: var(--step-4);
+    font-size: var(--step-3);
     line-height: 1.1;
     margin-block: 0 var(--space-s-m);
 }
 
 h2,
 .beta {
-    font-size: var(--step-3);
+    font-size: var(--step-1);
 }
 
 textarea {
