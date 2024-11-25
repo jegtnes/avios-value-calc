@@ -10,6 +10,7 @@ export const VALUE_TRESHOLDS:Array<object> = [
   {
     name: "1p/Avios (HeadForPoints valuation)",
     value: 100,
+    default: true,
   },
   {
     name: "0.67p/Avios (Nectar points used for shopping)",

@@ -15,7 +15,10 @@
                 Avios value
                 <select name="aviosValue" id="aviosValue">
                     {% for item in valueTresholds %}
-                        <option value="{{item.value}}" {% if item.value == aviosValue %}selected{% endif %}>
+                        <option value="{{item.value}}"
+                            {% if item.value == aviosValue %}selected{% endif %}
+                            {% if item.default and not aviosValue %}selected{% endif %}
+                        >
                             {{item.name}}
                         </option>
                     {% endfor %}
